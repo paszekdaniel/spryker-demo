@@ -17,7 +17,7 @@
         </states>
 
         <transitions>
-            <transition condition="Demo/IsAuthorized">
+            <transition condition="Demo/IsAuthorized" happy="true">
                 <source>new</source>
                 <target>paid</target>
                 <event>pay</event>
@@ -29,7 +29,7 @@
                 <event>pay</event>
             </transition>
 
-            <transition>
+            <transition happy="true">
                 <source>paid</source>
                 <target>shipped</target>
                 <event>ship</event>
@@ -47,7 +47,7 @@
                 <event>refund</event>
             </transition>
 
-            <transition>
+            <transition happy="true">
                 <source>shipped</source>
                 <target>closed</target>
                 <event>close</event>
