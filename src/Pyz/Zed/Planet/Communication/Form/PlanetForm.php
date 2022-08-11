@@ -18,10 +18,10 @@ use Symfony\Component\Validator\Constraints\Positive;
 
 class PlanetForm extends AbstractType
 {
-    private const FIELD_NAME = 'name';
-    private const FIELD_INTERESTING_FACT = 'interesting_fact';
-    private const FIELD_NR_FROM_SUN = 'nr_from_sun';
-    private const FIELD_VOLUME_IN_EARTHS = 'volume_in_earths';
+    public const FIELD_NAME = 'name';
+    public const FIELD_INTERESTING_FACT = 'interesting_fact';
+    public const FIELD_NR_FROM_SUN = 'nr_from_sun';
+    public const FIELD_VOLUME_IN_EARTHS = 'volume_in_earths';
     private const BUTTON_SUBMIT = 'Submit';
 
     /**
