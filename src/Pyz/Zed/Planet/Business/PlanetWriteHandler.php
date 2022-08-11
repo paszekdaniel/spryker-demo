@@ -4,16 +4,42 @@ namespace Pyz\Zed\Planet\Business;
 
 
 use Generated\Shared\Transfer\PlanetTransfer;
+use phpDocumentor\Reflection\Types\Mixed_;
+use Propel\Runtime\Exception\PropelException;
 use Pyz\Zed\Planet\Persistence\PlanetEntityManagerInterface;
 
 class PlanetWriteHandler
 {
-    protected $entityManager;
+    protected PlanetEntityManagerInterface $entityManager;
+
     public function __construct(PlanetEntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
-    public function createPlanetEntity(PlanetTransfer $dto): PlanetTransfer {
-        return $this->entityManager->savePlanetEntity($dto);
+
+    /**
+     * @param PlanetTransfer|null $dto
+     * @return PlanetTransfer
+     */
+    public function createPlanetEntity(PlanetTransfer $dto): ?PlanetTransfer
+    {
+        try {
+            return $this->entityManager->savePlanetEntity($dto);
+        } catch (PropelException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * @param PlanetTransfer $dto
+     * @return PlanetTransfer|null
+     */
+    public function updatePlanetEntity(PlanetTransfer $dto): ?PlanetTransfer
+    {
+        try {
+            return $this->entityManager->updatePlanetEntity($dto);
+        } catch (PropelException $e) {
+            return null;
+        }
     }
 }

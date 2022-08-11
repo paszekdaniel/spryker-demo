@@ -5,6 +5,7 @@ namespace Pyz\Zed\Planet\Communication\Controller;
 use Generated\Shared\Transfer\PlanetTransfer;
 use Pyz\Zed\Planet\Business\PlanetFacadeInterface;
 use Pyz\Zed\Planet\Communication\Form\PlanetForm;
+use Pyz\Zed\Planet\Communication\UtilCommunication;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -31,15 +32,16 @@ class CreateController extends AbstractController
         if ($planetForm->isSubmitted() && $planetForm->isValid()) {
 
             $dto = new PlanetTransfer();
-            $dto->setName($planetForm->get(PlanetForm::FIELD_NAME)->getData());
-            $dto->setInterestingFact($planetForm->get(PlanetForm::FIELD_INTERESTING_FACT)->getData());
-            $dto->setVolumeInEarths($planetForm->get(PlanetForm::FIELD_VOLUME_IN_EARTHS)->getData());
-            $dto->setNrFromSun($planetForm->get(PlanetForm::FIELD_NR_FROM_SUN)->getData());
 
+            UtilCommunication::mapFormRequestToDto($dto, $planetForm);
 
-            $this->getFacade()->createPlanetEntity($dto);
+            $result = $this->getFacade()->createPlanetEntity($dto);
+            if(!$result) {
+                $this->addErrorMessage("Planet couldn't be created. Probably this one already exists");
+            } else {
+                $this->addSuccessMessage('Planet was created. At least really likely :)');
+            }
 
-            $this->addSuccessMessage('Planet was created. At least really likely :)');
 
             return $this->redirectResponse('/planet/list');
         }

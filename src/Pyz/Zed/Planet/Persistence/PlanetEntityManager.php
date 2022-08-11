@@ -12,6 +12,9 @@ use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityManagerInterface
 {
 
+    /**
+     * @throws \Propel\Runtime\Exception\PropelException
+     */
     public function savePlanetEntity(PlanetTransfer $dto): PlanetTransfer
     {
         $planetEntity = new PyzPlanet();
@@ -22,8 +25,16 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
         return $dto;
     }
 
+    /**
+     * @throws \Propel\Runtime\Exception\PropelException
+     */
     public function updatePlanetEntity(PlanetTransfer $dto): PlanetTransfer
     {
-        // TODO: Implement updatePlanetEntity() method.
+        $query = $this->getFactory()->createPlanetQuery();
+        $planetEntity = $query->findOneByName($dto->getName());
+        $planetEntity->fromArray($dto->modifiedToArray());
+        $planetEntity->save();
+        $dto->fromArray($planetEntity->toArray(), true);
+        return $dto;
     }
 }

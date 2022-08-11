@@ -11,14 +11,21 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class PlanetFacade extends AbstractFacade implements PlanetFacadeInterface
 {
 
-    public function createPlanetEntity(PlanetTransfer $dto): PlanetTransfer
+    /**
+     * @param PlanetTransfer $dto
+     * @return PlanetTransfer|null
+     */
+    public function createPlanetEntity(PlanetTransfer $dto): ?PlanetTransfer
     {
         return $this->getFactory()
             ->getPlanetWriteHandler()->createPlanetEntity($dto);
     }
 
-    public function updatePlanetEntity(PlanetTransfer $dto): PlanetTransfer
+    public function updatePlanetEntity(PlanetTransfer $dto): ?PlanetTransfer
     {
-        // TODO: Implement updatePlanetEntity() method.
+        return $this->getFactory()->getPlanetWriteHandler()->updatePlanetEntity($dto);
+    }
+    public function findPlanetByName(string $name): PlanetTransfer {
+        return $this->getFactory()->getPlanetReadHandler()->findPlanetByName($name);
     }
 }

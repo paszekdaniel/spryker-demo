@@ -13,5 +13,8 @@
                 size="255"/>
         <column name="nr_from_sun" type="INTEGER" />
         <column name="volume_in_earths" type="FLOAT" />
+        <unique>
+            <unique-column name="name" />
+        </unique>
     </table>
 </database>
