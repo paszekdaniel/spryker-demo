@@ -37,4 +37,14 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
         $dto->fromArray($planetEntity->toArray(), true);
         return $dto;
     }
+
+    /**
+     * @throws \Propel\Runtime\Exception\PropelException
+     */
+    public function deletePlanetByName(string $name)
+    {
+        $query = $this->getFactory()->createPlanetQuery();
+        $planetEntity = $query->findOneByName($name);
+        $planetEntity->delete();
+    }
 }

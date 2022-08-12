@@ -42,4 +42,13 @@ class PlanetWriteHandler
             return null;
         }
     }
+    public function deletePlanetByName(string $name): bool
+    {
+        try {
+            $this->entityManager->deletePlanetByName($name);
+            return true;
+        } catch (PropelException $e) {
+            return false;
+        }
+    }
 }

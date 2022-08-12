@@ -28,4 +28,9 @@ class PlanetFacade extends AbstractFacade implements PlanetFacadeInterface
     public function findPlanetByName(string $name): PlanetTransfer {
         return $this->getFactory()->getPlanetReadHandler()->findPlanetByName($name);
     }
+
+    public function deletePlanetByName(string $name): bool
+    {
+        return $this->getFactory()->getPlanetWriteHandler()->deletePlanetByName($name);
+    }
 }

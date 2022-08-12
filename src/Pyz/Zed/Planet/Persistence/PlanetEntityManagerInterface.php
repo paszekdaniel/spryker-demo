@@ -14,4 +14,9 @@ interface PlanetEntityManagerInterface
      * @throws \Propel\Runtime\Exception\PropelException
      */
     public function updatePlanetEntity(PlanetTransfer $dto): PlanetTransfer;
+
+    /**
+     * @throws \Propel\Runtime\Exception\PropelException
+     */
+    public function deletePlanetByName(string $name);
 }

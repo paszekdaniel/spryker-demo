@@ -2,6 +2,9 @@
 {% set widget_title = 'Overview of Planets' %}
 {% block head_title widget_title %}
 {% block section_title widget_title %}
+{% block action %}
+    {{ createActionButton('/planet/create', 'Create Planet' | trans) }}
+{% endblock %}
 {% block content %}
     {% embed '@Gui/Partials/widget.twig' with { widget_title: 'List of planets' } %}
         {% block widget_content %}

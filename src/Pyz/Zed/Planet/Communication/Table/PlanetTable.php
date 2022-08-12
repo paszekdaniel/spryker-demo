@@ -11,6 +11,7 @@ class PlanetTable extends AbstractTable
 {
     /** @var \Orm\Zed\Planet\Persistence\PyzPlanetQuery */
     private PyzPlanetQuery $planetQuery;
+    private const COL_ACTIONS = 'actions';
 
     /**
      * @param \Orm\Zed\Planet\Persistence\PyzPlanetQuery $planetQuery
@@ -27,11 +28,13 @@ class PlanetTable extends AbstractTable
      */
     protected function configure(TableConfiguration $config): TableConfiguration
     {
+
         $config->setHeader([
             PyzPlanetTableMap::COL_NAME => 'Planet name',
             PyzPlanetTableMap::COL_INTERESTING_FACT => 'Interesting fact',
             PyzPlanetTableMap::COL_NR_FROM_SUN => 'Number from sun',
-            PyzPlanetTableMap::COL_VOLUME_IN_EARTHS => 'Volume(in earths)'
+            PyzPlanetTableMap::COL_VOLUME_IN_EARTHS => 'Volume(in earths)',
+            self::COL_ACTIONS => 'Actions'
         ]);
 
         $config->setSortable([
@@ -46,6 +49,10 @@ class PlanetTable extends AbstractTable
             PyzPlanetTableMap::COL_NR_FROM_SUN
         ]);
 
+        $config->setRawColumns([
+            self::COL_ACTIONS
+        ]);
+
         return $config;
     }
 
@@ -56,9 +63,32 @@ class PlanetTable extends AbstractTable
      */
     protected function prepareData(TableConfiguration $config): array
     {
-        return $this->runQuery(
+        $planetItems = $this->runQuery(
             $this->planetQuery,
             $config
+        );
+        $planetRows = [];
+
+        foreach ($planetItems as $planetItem) {
+            $planetItem[self::COL_ACTIONS] = $this->generateItem($planetItem);
+
+            $planetRows[] = $planetItem;
+        }
+        return $planetRows;
+    }
+    protected function generateItem($planetItem) {
+        $btnGroup = [];
+        $btnGroup[] = $this->createButtonGroupItem(
+            "Edit",
+            "/planet/edit?name={$planetItem[PyzPlanetTableMap::COL_NAME]}"
+        );
+        $btnGroup[] = $this->createButtonGroupItem(
+            "Delete",
+            "/planet/delete?name={$planetItem[PyzPlanetTableMap::COL_NAME]}"
+        );
+        return $this->generateButtonGroup(
+            $btnGroup,
+            'Actions'
         );
     }
 
