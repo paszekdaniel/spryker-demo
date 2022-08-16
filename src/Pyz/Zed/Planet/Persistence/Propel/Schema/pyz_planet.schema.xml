@@ -13,8 +13,12 @@
                 size="255"/>
         <column name="nr_from_sun" type="INTEGER" />
         <column name="volume_in_earths" type="FLOAT" />
+        <column name="fk_star" type="INTEGER" />
         <unique>
             <unique-column name="name" />
         </unique>
+        <foreign-key foreignTable="pyz_star">
+            <reference local="fk_star" foreign="id_star" />
+        </foreign-key>
     </table>
 </database>

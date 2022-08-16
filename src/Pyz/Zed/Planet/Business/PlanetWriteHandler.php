@@ -4,7 +4,6 @@ namespace Pyz\Zed\Planet\Business;
 
 
 use Generated\Shared\Transfer\PlanetTransfer;
-use phpDocumentor\Reflection\Types\Mixed_;
 use Propel\Runtime\Exception\PropelException;
 use Pyz\Zed\Planet\Persistence\PlanetEntityManagerInterface;
 
@@ -36,6 +35,7 @@ class PlanetWriteHandler
      */
     public function updatePlanetEntity(PlanetTransfer $dto): ?PlanetTransfer
     {
+
         try {
             return $this->entityManager->savePlanetEntity($dto);
         } catch (PropelException $e) {

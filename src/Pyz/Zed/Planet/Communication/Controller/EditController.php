@@ -4,8 +4,6 @@ namespace Pyz\Zed\Planet\Communication\Controller;
 
 use Generated\Shared\Transfer\PlanetTransfer;
 use Pyz\Zed\Planet\Business\PlanetFacadeInterface;
-use Pyz\Zed\Planet\Communication\Form\PlanetForm;
-use Pyz\Zed\Planet\Communication\UtilCommunication;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 

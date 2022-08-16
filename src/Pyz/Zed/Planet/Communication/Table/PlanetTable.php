@@ -3,6 +3,7 @@
 namespace Pyz\Zed\Planet\Communication\Table;
 
 use Orm\Zed\Planet\Persistence\Map\PyzPlanetTableMap;
+use Orm\Zed\Planet\Persistence\Map\PyzStarTableMap;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
 use Spryker\Zed\Gui\Communication\Table\TableConfiguration;
 use Orm\Zed\Planet\Persistence\PyzPlanetQuery;
@@ -34,6 +35,7 @@ class PlanetTable extends AbstractTable
             PyzPlanetTableMap::COL_INTERESTING_FACT => 'Interesting fact',
             PyzPlanetTableMap::COL_NR_FROM_SUN => 'Number from sun',
             PyzPlanetTableMap::COL_VOLUME_IN_EARTHS => 'Volume(in earths)',
+            PyzStarTableMap::COL_NAME => 'Star',
             self::COL_ACTIONS => 'Actions'
         ]);
 
@@ -41,12 +43,14 @@ class PlanetTable extends AbstractTable
             PyzPlanetTableMap::COL_NAME,
             PyzPlanetTableMap::COL_INTERESTING_FACT,
             PyzPlanetTableMap::COL_NR_FROM_SUN,
-            PyzPlanetTableMap::COL_VOLUME_IN_EARTHS
+            PyzPlanetTableMap::COL_VOLUME_IN_EARTHS,
+            PyzStarTableMap::COL_NAME
         ]);
 
         $config->setSearchable([
             PyzPlanetTableMap::COL_NAME,
-            PyzPlanetTableMap::COL_NR_FROM_SUN
+            PyzPlanetTableMap::COL_NR_FROM_SUN,
+            PyzStarTableMap::COL_NAME
         ]);
 
         $config->setRawColumns([
@@ -63,6 +67,7 @@ class PlanetTable extends AbstractTable
      */
     protected function prepareData(TableConfiguration $config): array
     {
+        $this->planetQuery->leftJoinWithPyzStar();
         $planetItems = $this->runQuery(
             $this->planetQuery,
             $config
@@ -70,6 +75,7 @@ class PlanetTable extends AbstractTable
         $planetRows = [];
 
         foreach ($planetItems as $planetItem) {
+            $planetItem[PyzStarTableMap::COL_NAME] = $planetItem["PyzStar"][PyzStarTableMap::COL_NAME] ?? "";
             $planetItem[self::COL_ACTIONS] = $this->generateItemButtons($planetItem);
 
             $planetRows[] = $planetItem;

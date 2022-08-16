@@ -3,7 +3,6 @@
 namespace Pyz\Zed\Planet\Persistence;
 
 use Generated\Shared\Transfer\PlanetTransfer;
-use Orm\Zed\Planet\Persistence\PyzPlanet;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -22,6 +21,10 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
             ->findOneOrCreate();
 
         $planetEntity->fromArray($dto->toArray());
+        if(!$planetEntity->getFkStar() && $dto->getStarName()) {
+            $star = $this->getFactory()->createStarQuery()->findOneByName($dto->getStarName());
+            $planetEntity->setPyzStar($star);
+        }
         $planetEntity->save();
 
         $dto->fromArray($planetEntity->toArray());

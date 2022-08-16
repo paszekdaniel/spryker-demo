@@ -8,5 +8,7 @@
         <property name="interestingFact" type="string"/>
         <property name="nrFromSun" type="int" />
         <property name="volumeInEarths" type="float" />
+        <property name="fkStar" type="int" />
+        <property name="starName" type="string" />
     </transfer>
 </transfers>
