@@ -17,24 +17,14 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
      */
     public function savePlanetEntity(PlanetTransfer $dto): PlanetTransfer
     {
-        $planetEntity = new PyzPlanet();
-        $planetEntity->fromArray($dto->modifiedToArray());
+        $planetEntity = $this->getFactory()->createPlanetQuery()
+            ->filterByIdPlanet($dto->getIdPlanet())
+            ->findOneOrCreate();
+
+        $planetEntity->fromArray($dto->toArray());
         $planetEntity->save();
 
-        $dto->fromArray($planetEntity->toArray(), true);
-        return $dto;
-    }
-
-    /**
-     * @throws \Propel\Runtime\Exception\PropelException
-     */
-    public function updatePlanetEntity(PlanetTransfer $dto): PlanetTransfer
-    {
-        $query = $this->getFactory()->createPlanetQuery();
-        $planetEntity = $query->findOneByName($dto->getName());
-        $planetEntity->fromArray($dto->modifiedToArray());
-        $planetEntity->save();
-        $dto->fromArray($planetEntity->toArray(), true);
+        $dto->fromArray($planetEntity->toArray());
         return $dto;
     }
 

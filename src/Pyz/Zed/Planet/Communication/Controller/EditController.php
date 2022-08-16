@@ -22,7 +22,6 @@ class EditController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-//        $this->castId()
         $name = ($request->query->get('name'));
         $planetTransfer = (new PlanetTransfer());
         if($name) {
@@ -33,14 +32,14 @@ class EditController extends AbstractController
             ->handleRequest($request);
 
         if ($planetForm->isSubmitted() && $planetForm->isValid()) {
-            $dto = new PlanetTransfer();
-            UtilCommunication::mapFormRequestToDto($dto, $planetForm);
+//            $dto = new PlanetTransfer();
+//            UtilCommunication::mapFormRequestToDto($dto, $planetForm);
 
-            $result = $this->getFacade()->updatePlanetEntity($dto);
+            $result = $this->getFacade()->updatePlanetEntity($planetForm->getData());
             if(!$result) {
                 $this->addErrorMessage("Planet couldn't be created. Probably this one already exists");
             } else {
-                $this->addSuccessMessage('Planet was updated. At least I hope :)');
+                $this->addSuccessMessage('Planet was updated. At least I hope it was :)');
             }
 
             return $this->redirectResponse('/planet/list');

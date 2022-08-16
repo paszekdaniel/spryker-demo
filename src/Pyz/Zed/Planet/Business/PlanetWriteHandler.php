@@ -37,7 +37,7 @@ class PlanetWriteHandler
     public function updatePlanetEntity(PlanetTransfer $dto): ?PlanetTransfer
     {
         try {
-            return $this->entityManager->updatePlanetEntity($dto);
+            return $this->entityManager->savePlanetEntity($dto);
         } catch (PropelException $e) {
             return null;
         }

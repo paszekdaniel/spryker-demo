@@ -108,7 +108,6 @@ class PlanetForm extends AbstractType
     private function addVolumeInEarths(FormBuilderInterface $builder): PlanetForm
     {
         $builder->add(static::FIELD_VOLUME_IN_EARTHS, NumberType::class, [
-            'html5' => true,
             'required' => false,
             'constraints' => [
                 new Positive()

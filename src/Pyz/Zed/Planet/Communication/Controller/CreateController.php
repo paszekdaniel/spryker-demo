@@ -31,15 +31,11 @@ class CreateController extends AbstractController
 
         if ($planetForm->isSubmitted() && $planetForm->isValid()) {
 
-            $dto = new PlanetTransfer();
-
-            UtilCommunication::mapFormRequestToDto($dto, $planetForm);
-
-            $result = $this->getFacade()->createPlanetEntity($dto);
+            $result = $this->getFacade()->createPlanetEntity($planetForm->getData());
             if(!$result) {
                 $this->addErrorMessage("Planet couldn't be created. Probably this one already exists");
             } else {
-                $this->addSuccessMessage('Planet was created. At least really likely :)');
+                $this->addSuccessMessage('Planet was created. :)');
             }
 
 
