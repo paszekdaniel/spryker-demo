@@ -70,13 +70,13 @@ class PlanetTable extends AbstractTable
         $planetRows = [];
 
         foreach ($planetItems as $planetItem) {
-            $planetItem[self::COL_ACTIONS] = $this->generateItem($planetItem);
+            $planetItem[self::COL_ACTIONS] = $this->generateItemButtons($planetItem);
 
             $planetRows[] = $planetItem;
         }
         return $planetRows;
     }
-    protected function generateItem($planetItem) {
+    protected function generateItemButtons($planetItem) {
         $btnGroup = [];
         $btnGroup[] = $this->createButtonGroupItem(
             "Edit",
