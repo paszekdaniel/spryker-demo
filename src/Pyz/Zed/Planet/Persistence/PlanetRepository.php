@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\Planet\Persistence;
 
+use Generated\Shared\Transfer\PlanetCollectionTransfer;
 use Generated\Shared\Transfer\PlanetTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -18,5 +19,17 @@ class PlanetRepository extends AbstractRepository implements PlanetRepositoryInt
         $dto = new PlanetTransfer();
         $dto->fromArray($planetEntity->toArray(), true);
         return $dto;
+    }
+    public function fetchAllPlanets(): PlanetCollectionTransfer
+    {
+        $query = $this->getFactory()->createPlanetQuery();
+        $planets = $query->find();
+        $transfer = new PlanetCollectionTransfer();
+        foreach ($planets as $planet) {
+            $temp = new PlanetTransfer();
+            $temp->fromArray($planet->toArray());
+            $transfer->addPlanet($temp);
+        }
+        return $transfer;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\Planet\Business;
 
+use Generated\Shared\Transfer\PlanetCollectionTransfer;
 use Generated\Shared\Transfer\PlanetTransfer;
 
 interface PlanetFacadeInterface
@@ -14,4 +15,5 @@ interface PlanetFacadeInterface
 
     public function deletePlanetByName(string $name): bool;
 
+    public function getPlanetsCollection(): PlanetCollectionTransfer;
 }

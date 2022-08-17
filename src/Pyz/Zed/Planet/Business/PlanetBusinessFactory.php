@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\Planet\Business;
 
+use Generated\Shared\Transfer\PlanetCollectionTransfer;
 use Pyz\Zed\Planet\Persistence\PlanetEntityManagerInterface;
 use Pyz\Zed\Planet\Persistence\PlanetRepositoryInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
@@ -20,4 +21,5 @@ class PlanetBusinessFactory extends AbstractBusinessFactory
     {
         return new PlanetWriteHandler($this->getEntityManager());
     }
+
 }

@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\Planet\Business;
 
+use Generated\Shared\Transfer\PlanetCollectionTransfer;
 use Generated\Shared\Transfer\PlanetTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -32,5 +33,8 @@ class PlanetFacade extends AbstractFacade implements PlanetFacadeInterface
     public function deletePlanetByName(string $name): bool
     {
         return $this->getFactory()->getPlanetWriteHandler()->deletePlanetByName($name);
+    }
+    public function getPlanetsCollection(): PlanetCollectionTransfer {
+        return $this->getFactory()->getPlanetReadHandler()->fetchAll();
     }
 }
