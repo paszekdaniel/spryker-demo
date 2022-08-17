@@ -4,7 +4,7 @@
 {% block section_title widget_title %}
 {% block action %}
     {{ createActionButton('/planet-star/create', 'Create Star' | trans) }}
-    {{ createActionButton('/planet/create', 'Create Planet' | trans) }}
+    {{ createActionButton('/planet/list', 'See Planet' | trans) }}
 {% endblock %}
 {% block content %}
     {% embed '@Gui/Partials/widget.twig' with { widget_title: 'List of planets' } %}
