@@ -30,21 +30,33 @@ class StarTable extends AbstractTable
         ]);
         return $config;
     }
-//TODO: fix fetching data for 1-N
     protected function prepareData(TableConfiguration $config)
     {
-        $this->starQuery->with('PyzPlanet');
-        $this->starQuery->limit(10);
-        $starItems = $this->runQuery(
-            $this->starQuery,
-            $config
-        );
+//        $starItems = $this->starQuery->find();
+//        $this->starQuery->leftJoinPyzPlanet();
+//        $starItems = $this->runQuery(
+//            $this->starQuery,
+//            $config,
+//        );
 //        $starItems->populateRelation('PyzPlanet');
+        $starItems = PyzStarQuery::create()->find();
+
         $starRows = [];
 
+//        TODO: Fix N plus 1 problem
         foreach ($starItems as $starItem) {
-            $starItem[self::PLANETS] = json_encode($starItem);
-            $starRows[] = $starItem;
+            $row = [];
+            $row[PyzStarTableMap::COL_NAME] = $starItem->getName();
+            $row[PyzStarTableMap::COL_DISTANCE] = $starItem->getDistance();
+            $row[PyzStarTableMap::COL_MASS_IN_SUNS] = $starItem->getMassInSuns();
+            $planets = $starItem->getPyzPlanets()->toArray();
+            $planetString = "";
+            foreach ($planets as $planet) {
+                $planetString = $planetString . $planet["Name"] . ", ";
+            }
+            $row[self::PLANETS] = $planetString;
+//            $starItem[self::PLANETS] = json_encode($starItem);
+            $starRows[] = $row;
         }
         return $starRows;
     }
