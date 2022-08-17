@@ -32,28 +32,22 @@ class StarTable extends AbstractTable
     }
     protected function prepareData(TableConfiguration $config)
     {
-//        $starItems = $this->starQuery->find();
-//        $this->starQuery->leftJoinPyzPlanet();
-//        $starItems = $this->runQuery(
-//            $this->starQuery,
-//            $config,
-//        );
-//        $starItems->populateRelation('PyzPlanet');
+//        not using config here, because it didn't work with $this->runQuery(..,$config)
         $starItems = PyzStarQuery::create()->find();
+        $starItems->populateRelation("PyzPlanet");
 
         $starRows = [];
 
-//        TODO: Fix N plus 1 problem
         foreach ($starItems as $starItem) {
             $row = [];
             $row[PyzStarTableMap::COL_NAME] = $starItem->getName();
             $row[PyzStarTableMap::COL_DISTANCE] = $starItem->getDistance();
             $row[PyzStarTableMap::COL_MASS_IN_SUNS] = $starItem->getMassInSuns();
             $planets = $starItem->getPyzPlanets()->toArray();
-            $planetString = "";
-            foreach ($planets as $planet) {
-                $planetString = $planetString . $planet["Name"] . ", ";
-            }
+            $planets = array_map(function ($planet) {
+                return $planet["Name"];
+            },$planets);
+            $planetString = implode(', ',$planets);
             $row[self::PLANETS] = $planetString;
 //            $starItem[self::PLANETS] = json_encode($starItem);
             $starRows[] = $row;
