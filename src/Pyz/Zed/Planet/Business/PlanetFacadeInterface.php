@@ -16,4 +16,6 @@ interface PlanetFacadeInterface
     public function deletePlanetByName(string $name): bool;
 
     public function getPlanetsCollection(): PlanetCollectionTransfer;
+
+    public function findPlanetById(int $id): PlanetTransfer;
 }

@@ -3,6 +3,7 @@
 namespace Pyz\Glue\PlanetsRestApi\Processor\Planets;
 
 use Generated\Shared\Transfer\PlanetCollectionTransfer;
+use Generated\Shared\Transfer\PlanetTransfer;
 use Pyz\Client\PlanetsRestApi\PlanetsRestApiClientInterface;
 use Pyz\Glue\PlanetsRestApi\PlanetsRestApiConfig;
 use Pyz\Glue\PlanetsRestApi\Processor\Mapper\PlanetsResourceMapper;
@@ -50,6 +51,23 @@ class PlanetsReader implements PlanetsReaderInterface
             );
             $restResponse->addResource($restResource);
         }
+        return $restResponse;
+    }
+
+    public function getPlanetById(RestRequestInterface $restRequest): RestResponseInterface {
+        $planetId = $restRequest->getResource()->getId();
+        $restResponse = $this->restResourceBuilder->createRestResponse();
+
+        $planetTransfer = new PlanetTransfer();
+        $planetTransfer->setIdPlanet($planetId);
+        $planetTransfer = $this->planetsRestApiClient->getPlanetById($planetTransfer);
+
+        $restResource = $this->restResourceBuilder->createRestResource(
+            PlanetsRestApiConfig::RESOURCE_PLANETS,
+            $planetTransfer->getIdPlanet(),
+            $this->planetMapper->mapPlanetDataToPlanetRestAttributes($planetTransfer->toArray())
+        );
+        $restResponse->addResource($restResource);
         return $restResponse;
     }
 }

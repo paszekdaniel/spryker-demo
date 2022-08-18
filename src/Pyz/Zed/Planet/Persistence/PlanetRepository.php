@@ -32,4 +32,13 @@ class PlanetRepository extends AbstractRepository implements PlanetRepositoryInt
         }
         return $transfer;
     }
+
+    public function findPlanetEntityById(int $id): PlanetTransfer
+    {
+        $query = $this->getFactory()->createPlanetQuery();
+        $planet = $query->findOneByIdPlanet($id);
+        $transfer = new PlanetTransfer();
+        $transfer->fromArray($planet->toArray(), true);
+        return $transfer;
+    }
 }

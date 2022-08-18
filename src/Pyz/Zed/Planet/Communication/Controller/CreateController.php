@@ -30,7 +30,7 @@ class CreateController extends AbstractController
 
             $result = $this->getFacade()->createPlanetEntity($planetForm->getData());
             if(!$result) {
-                $this->addErrorMessage("Planet couldn't be created. Probably this one already exists");
+                $this->addErrorMessage("Planet couldn't be created. Probably already exists or star is not defined");
             } else {
                 $this->addSuccessMessage('Planet was created. :)');
             }

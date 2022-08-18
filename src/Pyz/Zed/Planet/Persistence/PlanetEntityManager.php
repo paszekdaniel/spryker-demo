@@ -3,7 +3,10 @@
 namespace Pyz\Zed\Planet\Persistence;
 
 use Generated\Shared\Transfer\PlanetTransfer;
+use Propel\Runtime\Exception\PropelException;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
+
+use function PHPUnit\Framework\throwException;
 
 /**
  * @method PlanetPersistenceFactory getFactory()
@@ -20,9 +23,12 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
             ->filterByIdPlanet($dto->getIdPlanet())
             ->findOneOrCreate();
 
-        $planetEntity->fromArray($dto->toArray());
-        if(!$planetEntity->getFkStar() && $dto->getStarName()) {
+        if($dto->getStarName()) {
             $star = $this->getFactory()->createStarQuery()->findOneByName($dto->getStarName());
+            if(!$star) {
+                // wrong star
+                throw new PropelException();
+            }
             $planetEntity->setPyzStar($star);
         }
         $planetEntity->save();

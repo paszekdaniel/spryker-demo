@@ -3,6 +3,7 @@
 namespace Pyz\Client\PlanetsRestApi\Zed;
 
 use Generated\Shared\Transfer\PlanetCollectionTransfer;
+use Generated\Shared\Transfer\PlanetTransfer;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 
 class PlanetsRestApiZedStub implements PlanetsRestApiZedStubInterface
@@ -29,5 +30,15 @@ class PlanetsRestApiZedStub implements PlanetsRestApiZedStubInterface
         $planetCollectionTransfer = $this->zedRequestClient->call('/planet/gateway/get-planet-collection', $planetCollectionTransfer);
 
         return $planetCollectionTransfer;
+    }
+
+    public function getPlanetById(PlanetTransfer $planetTransfer): PlanetTransfer
+    {
+        /**
+         * @var PlanetTransfer $planetTransfer
+         */
+        $planetTransfer = $this->zedRequestClient->call("/planet/gateway/get-planet-by-id", $planetTransfer);
+
+        return $planetTransfer;
     }
 }

@@ -10,4 +10,6 @@ interface PlanetRepositoryInterface
     public function findPlanetEntityByName(string $name): PlanetTransfer;
 
     public function fetchAllPlanets(): PlanetCollectionTransfer;
+
+    public function findPlanetEntityById(int $id): PlanetTransfer;
 }

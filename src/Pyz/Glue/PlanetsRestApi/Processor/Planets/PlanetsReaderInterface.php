@@ -11,4 +11,6 @@ interface PlanetsReaderInterface
      * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
     public function getPlanets(RestRequestInterface $restRequest): RestResponseInterface;
+
+    public function getPlanetById(RestRequestInterface $restRequest): RestResponseInterface;
 }

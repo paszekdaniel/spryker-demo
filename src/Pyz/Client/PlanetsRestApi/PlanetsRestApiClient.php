@@ -3,6 +3,7 @@
 namespace Pyz\Client\PlanetsRestApi;
 
 use Generated\Shared\Transfer\PlanetCollectionTransfer;
+use Generated\Shared\Transfer\PlanetTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -19,5 +20,16 @@ class PlanetsRestApiClient extends AbstractClient implements PlanetsRestApiClien
         return $this->getFactory()
             ->createPlanetZedStub()
             ->getPlanetCollection($planetCollectionTransfer);
+    }
+
+    /**
+     * @api
+     * @param PlanetTransfer $planetTransfer
+     * @return PlanetTransfer
+     */
+    public function getPlanetById(PlanetTransfer $planetTransfer): PlanetTransfer {
+        return $this->getFactory()
+            ->createPlanetZedStub()
+            ->getPlanetById($planetTransfer);
     }
 }
