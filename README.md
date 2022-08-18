@@ -2,7 +2,17 @@
 
 After installing b2b version switched to b2c. <br>
 Working dummy oms, cms based on colors in cart and <br>
-added hello-spryker module
+added hello-spryker module <br>
+Planet module fully working with CRUD backoffice, glue API(noly fetching all planets) <br>
+Stars in PlanetStar module have planets, and in tables planets/stars are shown alongside. <br>
+
+
+### TODO:
+
+[ ] Glue rest api can fetch planet by id in ...com/planets/1
+[ ] Delete Star cascades planets delete
+[ ] Planet rest api fetches parent star with planet
+[ ] Select star name from list in PlanetForm
 
 
 # Spryker B2C Demo Shop
