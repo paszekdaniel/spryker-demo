@@ -14,10 +14,11 @@ class PlanetRepository extends AbstractRepository implements PlanetRepositoryInt
 
     public function findPlanetEntityByName(string $name): PlanetTransfer
     {
-        $query = $this->getFactory()->createPlanetQuery();
+        $query = $this->getFactory()->createPlanetQuery()->leftJoinWithPyzStar();
         $planetEntity = $query->findOneByName($name);
         $dto = new PlanetTransfer();
         $dto->fromArray($planetEntity->toArray(), true);
+        $dto->setStarName($planetEntity->getPyzStar()->getName());
         return $dto;
     }
     public function fetchAllPlanets(): PlanetCollectionTransfer

@@ -3,6 +3,7 @@
 namespace Pyz\Zed\PlanetStar\Persistence;
 
 use Generated\Shared\Transfer\PyzStarEntityTransfer;
+use Orm\Zed\Planet\Persistence\PyzStar;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -19,8 +20,8 @@ class PlanetStarEntityManager extends AbstractEntityManager implements PlanetSta
         return $transfer->fromArray($star->toArray());
     }
     public function deleteStar(PyzStarEntityTransfer $transfer) {
-        $query = $this->getFactory()->createStarQuery();
-//        2 queries to delete by id??
-        $query->findByIdStar($transfer->getIdStar())->delete();
+//        fixed to 1 query
+        $star = new PyzStar();
+        $star->setIdStar($transfer->getIdStar())->delete();
     }
 }
