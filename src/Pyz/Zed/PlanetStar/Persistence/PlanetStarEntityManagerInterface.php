@@ -8,4 +8,6 @@ interface PlanetStarEntityManagerInterface
 {
     public function saveStar(PyzStarEntityTransfer $transfer): PyzStarEntityTransfer;
 
+    public function deleteStar(PyzStarEntityTransfer $transfer);
+
 }

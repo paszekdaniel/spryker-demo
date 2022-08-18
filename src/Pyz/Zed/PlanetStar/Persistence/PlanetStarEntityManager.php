@@ -18,4 +18,9 @@ class PlanetStarEntityManager extends AbstractEntityManager implements PlanetSta
 
         return $transfer->fromArray($star->toArray());
     }
+    public function deleteStar(PyzStarEntityTransfer $transfer) {
+        $query = $this->getFactory()->createStarQuery();
+//        2 queries to delete by id??
+        $query->findByIdStar($transfer->getIdStar())->delete();
+    }
 }

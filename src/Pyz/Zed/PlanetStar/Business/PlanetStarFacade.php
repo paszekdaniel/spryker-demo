@@ -13,6 +13,10 @@ class PlanetStarFacade extends AbstractFacade implements PlanetStarFacadeInterfa
 
     public function createStar(PyzStarEntityTransfer $transfer): PyzStarEntityTransfer
     {
-        return $this->getFactory()->getStarSaver()->createStar($transfer);
+        return $this->getFactory()->getStarWriter()->createStar($transfer);
+    }
+    public function deleteStar(PyzStarEntityTransfer $transfer)
+    {
+        return $this->getFactory()->getStarWriter()->deleteStar($transfer);
     }
 }

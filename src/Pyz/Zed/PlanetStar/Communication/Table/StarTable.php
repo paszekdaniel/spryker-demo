@@ -11,6 +11,7 @@ class StarTable extends AbstractTable
 {
     private PyzStarQuery $starQuery;
     private const PLANETS = 'PLANETS';
+    private const ACTIONS = 'ACTIONS';
     public function __construct(PyzStarQuery $starQuery)
     {
         $this->starQuery = $starQuery;
@@ -26,7 +27,11 @@ class StarTable extends AbstractTable
             PyzStarTableMap::COL_NAME => 'Star name',
             PyzStarTableMap::COL_DISTANCE => 'Distance from Sun',
             PyzStarTableMap::COL_MASS_IN_SUNS => 'Mass(in suns)',
-            self::PLANETS => 'Orbiting planets'
+            self::PLANETS => 'Orbiting planets',
+            self::ACTIONS => 'Actions'
+        ]);
+        $config->setRawColumns([
+            self::ACTIONS
         ]);
         return $config;
     }
@@ -47,9 +52,25 @@ class StarTable extends AbstractTable
             $planets = array_map(fn ($planet) => $planet["Name"],$planets);
             $planetString = implode(', ',$planets);
             $row[self::PLANETS] = $planetString;
-//            $starItem[self::PLANETS] = json_encode($starItem);
+            $row[self::ACTIONS] = $this->generateButtonsItem($starItem);
             $starRows[] = $row;
         }
         return $starRows;
+    }
+    protected function generateButtonsItem($star): string
+    {
+        $btnGroup = [];
+        $btnGroup[] = $this->createButtonGroupItem(
+            "Edit",
+            "/planet-star/edit?id={$star->getIdStar()}"
+        );
+        $btnGroup[] = $this->createButtonGroupItem(
+            "Delete",
+            "/planet-star/delete?id={$star->getIdStar()}"
+        );
+        return $this->generateButtonGroup(
+            $btnGroup,
+            'Actions'
+        );
     }
 }

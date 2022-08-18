@@ -10,7 +10,8 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  */
 class PlanetStarBusinessFactory extends AbstractBusinessFactory
 {
-    public function getStarSaver() {
-        return new PlanetStarSaver($this->getEntityManager());
+    public function getStarWriter(): PlanetStarWriter
+    {
+        return new PlanetStarWriter($this->getEntityManager());
     }
 }
