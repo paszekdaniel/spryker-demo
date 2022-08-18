@@ -17,7 +17,7 @@
         <unique>
             <unique-column name="name" />
         </unique>
-        <foreign-key foreignTable="pyz_star">
+        <foreign-key foreignTable="pyz_star" onDelete="CASCADE">
             <reference local="fk_star" foreign="id_star" />
         </foreign-key>
     </table>

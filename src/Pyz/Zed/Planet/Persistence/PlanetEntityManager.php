@@ -23,6 +23,8 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
             ->filterByIdPlanet($dto->getIdPlanet())
             ->findOneOrCreate();
 
+        $planetEntity->fromArray($dto->toArray());
+
         if($dto->getStarName()) {
             $star = $this->getFactory()->createStarQuery()->findOneByName($dto->getStarName());
             if(!$star) {
@@ -31,7 +33,7 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
             }
             $planetEntity->setPyzStar($star);
         }
-        $planetEntity->save();
+            $planetEntity->save();
 
         $dto->fromArray($planetEntity->toArray());
         return $dto;

@@ -21,7 +21,7 @@ class CreateController extends AbstractController
             $this->addSuccessMessage('Star was created. :)');
 
 
-            return $this->redirectResponse('/planet/list');
+            return $this->redirectResponse('/planet-star/list');
 
         }
         return $this->viewResponse([

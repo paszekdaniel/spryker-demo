@@ -19,7 +19,7 @@ class DeleteController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-//        TODO: Probably needs more logic than this
+//        Probably needs more logic than this
 
         $name = ($request->query->get('name'));
 
