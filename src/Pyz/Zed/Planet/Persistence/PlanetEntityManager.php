@@ -3,6 +3,7 @@
 namespace Pyz\Zed\Planet\Persistence;
 
 use Generated\Shared\Transfer\PlanetTransfer;
+use Orm\Zed\Planet\Persistence\PyzPlanet;
 use Propel\Runtime\Exception\PropelException;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
@@ -56,5 +57,11 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
         $query = $this->getFactory()->createPlanetQuery();
         $planetEntity = $query->findOneByName($name);
         $planetEntity->delete();
+    }
+
+    public function deletePlanetById(int $id)
+    {
+        $planetEntity = new PyzPlanet();
+        $planetEntity->setIdPlanet($id)->delete();
     }
 }

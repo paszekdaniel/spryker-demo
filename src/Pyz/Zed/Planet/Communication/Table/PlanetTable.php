@@ -75,6 +75,7 @@ class PlanetTable extends AbstractTable
         $planetRows = [];
 
         foreach ($planetItems as $planetItem) {
+//            STAR!
             $planetItem[PyzStarTableMap::COL_NAME] = $planetItem["PyzStar"][PyzStarTableMap::COL_NAME] ?? "";
             $planetItem[self::COL_ACTIONS] = $this->generateItemButtons($planetItem);
 

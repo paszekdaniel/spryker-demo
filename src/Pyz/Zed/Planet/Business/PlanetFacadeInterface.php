@@ -22,4 +22,6 @@ interface PlanetFacadeInterface
     public function findPlanetById(int $id): PlanetTransfer;
 
     public function findPlanetWithStarById(int $id): PlanetTransfer;
+
+    public function deletePlanetById(int $id): bool;
 }

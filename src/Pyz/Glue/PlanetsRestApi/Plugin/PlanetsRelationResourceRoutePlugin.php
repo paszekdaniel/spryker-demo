@@ -11,7 +11,7 @@ use Spryker\Glue\Kernel\AbstractPlugin;
 /**
  * @method \Pyz\Glue\PlanetsRestApi\PlanetsRestApiFactory getFactory()
  */
-class PlanetsRelationResourcePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
+class PlanetsRelationResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
 {
     public function configure(ResourceRouteCollectionInterface $resourceRouteCollection): ResourceRouteCollectionInterface
     {

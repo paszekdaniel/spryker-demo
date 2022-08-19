@@ -52,4 +52,9 @@ class PlanetsRestApiClient extends AbstractClient implements PlanetsRestApiClien
     {
         return $this->getFactory()->createPlanetZedStub()->getPlanetWithStarById($planetTransfer);
     }
+
+    public function deletePlanetById(PlanetTransfer $planetTransfer): PlanetTransfer
+    {
+        return $this->getFactory()->createPlanetZedStub()->deletePlanetById($planetTransfer);
+    }
 }

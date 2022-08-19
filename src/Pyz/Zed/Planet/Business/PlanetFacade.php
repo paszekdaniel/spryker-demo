@@ -52,4 +52,9 @@ class PlanetFacade extends AbstractFacade implements PlanetFacadeInterface
     {
         return $this->getFactory()->getPlanetReadHandler()->findPlanetWithStarById($id);
     }
+
+    public function deletePlanetById(int $id): bool
+    {
+        return $this->getFactory()->getPlanetWriteHandler()->deletePlanetById($id);
+    }
 }

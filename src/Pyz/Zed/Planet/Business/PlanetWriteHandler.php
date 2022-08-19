@@ -51,4 +51,14 @@ class PlanetWriteHandler
             return false;
         }
     }
+
+    public function deletePlanetById(int $id): bool
+    {
+        try {
+            $this->entityManager->deletePlanetById($id);
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
 }

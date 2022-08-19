@@ -59,4 +59,14 @@ class PlanetsRestApiZedStub implements PlanetsRestApiZedStubInterface
 
         return $planetTransfer;
     }
+
+    public function deletePlanetById(PlanetTransfer $planetTransfer): PlanetTransfer
+    {
+        /**
+         * @var \Generated\Shared\Transfer\PlanetTransfer $planetTransfer
+         */
+        $planetTransfer = $this->zedRequestClient->call('/planet/gateway/delete-planet-by-id', $planetTransfer);
+
+        return $planetTransfer;
+    }
 }

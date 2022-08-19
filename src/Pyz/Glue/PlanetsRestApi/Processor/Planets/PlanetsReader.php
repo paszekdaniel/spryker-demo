@@ -29,10 +29,9 @@ class PlanetsReader implements PlanetsReaderInterface
      */
     public function __construct(
         PlanetsRestApiClientInterface $planetsRestApiClient,
-        RestResourceBuilderInterface   $restResourceBuilder,
+        RestResourceBuilderInterface $restResourceBuilder,
         PlanetsResourceMapperInterface $planetMapper
-    )
-    {
+    ) {
         $this->planetsRestApiClient = $planetsRestApiClient;
         $this->restResourceBuilder = $restResourceBuilder;
         $this->planetMapper = $planetMapper;
@@ -49,7 +48,8 @@ class PlanetsReader implements PlanetsReaderInterface
         return $restResponse;
     }
 
-    public function getPlanetById(RestRequestInterface $restRequest): RestResponseInterface {
+    public function getPlanetById(RestRequestInterface $restRequest): RestResponseInterface
+    {
         $planetId = $restRequest->getResource()->getId();
         $restResponse = $this->restResourceBuilder->createRestResponse();
 
@@ -61,10 +61,13 @@ class PlanetsReader implements PlanetsReaderInterface
 
         return $restResponse;
     }
+
     public function getPlanetsWithStar(RestRequestInterface $restRequest): RestResponseInterface
     {
         $restResponse = $this->restResourceBuilder->createRestResponse();
-        $planetCollectionTransfer = $this->planetsRestApiClient->getPlanetCollectionWithStar(new PlanetCollectionTransfer());
+        $planetCollectionTransfer = $this->planetsRestApiClient->getPlanetCollectionWithStar(
+            new PlanetCollectionTransfer()
+        );
 
         foreach ($planetCollectionTransfer->getPlanets() as $planetTransfer) {
             $this->addTransferObjectToResponse($planetTransfer, $restResponse);
@@ -72,7 +75,8 @@ class PlanetsReader implements PlanetsReaderInterface
         return $restResponse;
     }
 
-    public function getPlanetWithStarById(RestRequestInterface $restRequest): RestResponseInterface {
+    public function getPlanetWithStarById(RestRequestInterface $restRequest): RestResponseInterface
+    {
         $planetId = $restRequest->getResource()->getId();
         $restResponse = $this->restResourceBuilder->createRestResponse();
 
@@ -85,7 +89,23 @@ class PlanetsReader implements PlanetsReaderInterface
         return $restResponse;
     }
 
-    private function addTransferObjectToResponse(PlanetTransfer $planetTransfer, RestResponseInterface $restResponse) {
+    public function deletePlanetById(RestRequestInterface $restRequest): RestResponseInterface
+    {
+        $planetId = $restRequest->getResource()->getId();
+        $restResponse = $this->restResourceBuilder->createRestResponse();
+
+        $planetTransfer = new PlanetTransfer();
+        $planetTransfer->setIdPlanet($planetId);
+
+        $planetTransfer = $this->planetsRestApiClient->deletePlanetById($planetTransfer);
+
+        $this->addTransferObjectToResponse($planetTransfer, $restResponse);
+
+        return $restResponse;
+    }
+
+    private function addTransferObjectToResponse(PlanetTransfer $planetTransfer, RestResponseInterface $restResponse)
+    {
         $restResource = $this->restResourceBuilder->createRestResource(
             PlanetsRestApiConfig::RESOURCE_PLANETS,
             $planetTransfer->getIdPlanet(),
@@ -93,4 +113,6 @@ class PlanetsReader implements PlanetsReaderInterface
         );
         $restResponse->addResource($restResource);
     }
+
+
 }
