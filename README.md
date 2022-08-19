@@ -10,12 +10,13 @@ Glue API added PlanetRelationController that fetches planets with their correspo
 
 
 ### TODO:
-
-[x] Glue rest api can fetch planet by id in ...com/planets/1 <br>
 [x] Delete Star cascades planets delete <br>
+GLUE: <br>
+[x] Glue rest api can fetch planet by id in ...com/planets/1 <br>
 [x] Planet rest api fetches parent star with planet <br>
-[x] get planets-relation/$id endpoint <br>
-[ ] POST endpoint for creating planets?? <br>
+[x] GET planets-relation/$id endpoint <br>
+[x] DELETE endpoint for planets <br>
+[ ] POST endpoint for creating planets?? <br><br><br>
 [ ] Edit form for Star <br>
 [ ] Select star name from list in PlanetForm <br>
 
