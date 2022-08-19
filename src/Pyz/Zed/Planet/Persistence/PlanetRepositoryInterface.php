@@ -14,4 +14,6 @@ interface PlanetRepositoryInterface
     public function fetchALlPlanetsWithStars(): PlanetCollectionTransfer;
 
     public function findPlanetEntityById(int $id): PlanetTransfer;
+
+    public function findPlanetWithStarById(int $id): PlanetTransfer;
 }

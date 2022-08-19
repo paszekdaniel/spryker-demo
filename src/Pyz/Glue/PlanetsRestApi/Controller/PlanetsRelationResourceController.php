@@ -16,6 +16,9 @@ class PlanetsRelationResourceController extends AbstractController
      * @return RestResponseInterface
      */
     public function getAction(RestRequestInterface $restRequest): RestResponseInterface {
-        return $this->getFactory()->createPlanetsReader()->getPlanetsWithStar($restRequest);
+        if(!$restRequest->getResource()->getId()) {
+            return $this->getFactory()->createPlanetsReader()->getPlanetsWithStar($restRequest);
+        }
+        return $this->getFactory()->createPlanetsReader()->getPlanetWithStarById($restRequest);
     }
 }

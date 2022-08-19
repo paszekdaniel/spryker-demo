@@ -25,5 +25,11 @@ interface PlanetsRestApiClientInterface
      */
     public function getPlanetCollectionWithStar(PlanetCollectionTransfer $planetCollectionTransfer): PlanetCollectionTransfer;
 
+    /**
+     * @api
+     * @return PlanetTransfer
+     */
+    public function getPlanetWithStarById(PlanetTransfer $planetTransfer): PlanetTransfer;
+
 }
 

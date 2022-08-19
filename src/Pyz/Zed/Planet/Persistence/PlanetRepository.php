@@ -84,4 +84,18 @@ class PlanetRepository extends AbstractRepository implements PlanetRepositoryInt
         $starTransfer->fromArray($starEntity->toArray());
         return $starTransfer;
     }
+
+    public function findPlanetWithStarById(int $id): PlanetTransfer
+    {
+        $query = $this->getFactory()->createPlanetQuery()->leftJoinWithPyzStar();
+        $planet = $query->findOneByIdPlanet($id);
+        $transfer = new PlanetTransfer();
+        if(!$planet) {
+            return $transfer;
+        }
+        $transfer->fromArray($planet->toArray(), true);
+        $star = $this->mapPyzStarToStarTransfer($planet->getPyzStar());
+        $transfer->setStar($star);
+        return $transfer;
+    }
 }

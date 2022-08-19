@@ -16,4 +16,6 @@ interface PlanetsReaderInterface
 
     public function getPlanetsWithStar(RestRequestInterface $restRequest): RestResponseInterface;
 
+    public function getPlanetWithStarById(RestRequestInterface $restRequest): RestResponseInterface;
+
 }

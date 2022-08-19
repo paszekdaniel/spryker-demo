@@ -21,4 +21,7 @@ class GatewayController extends AbstractGatewayController
     public function getPlanetCollectionWithStarAction(?PlanetCollectionTransfer $planetCollectionTransfer): PlanetCollectionTransfer {
         return $this->getFacade()->getPlanetsCollectionWithStar();
     }
+    public function getPlanetWithStarByIdAction(PlanetTransfer $transfer): PlanetTransfer {
+        return $this->getFacade()->findPlanetWithStarById($transfer->getIdPlanet());
+    }
 }

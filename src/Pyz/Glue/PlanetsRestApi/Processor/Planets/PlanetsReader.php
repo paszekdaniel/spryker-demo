@@ -72,6 +72,19 @@ class PlanetsReader implements PlanetsReaderInterface
         return $restResponse;
     }
 
+    public function getPlanetWithStarById(RestRequestInterface $restRequest): RestResponseInterface {
+        $planetId = $restRequest->getResource()->getId();
+        $restResponse = $this->restResourceBuilder->createRestResponse();
+
+        $planetTransfer = new PlanetTransfer();
+        $planetTransfer->setIdPlanet($planetId);
+        $planetTransfer = $this->planetsRestApiClient->getPlanetWithStarById($planetTransfer);
+
+        $this->addTransferObjectToResponse($planetTransfer, $restResponse);
+
+        return $restResponse;
+    }
+
     private function addTransferObjectToResponse(PlanetTransfer $planetTransfer, RestResponseInterface $restResponse) {
         $restResource = $this->restResourceBuilder->createRestResource(
             PlanetsRestApiConfig::RESOURCE_PLANETS,
