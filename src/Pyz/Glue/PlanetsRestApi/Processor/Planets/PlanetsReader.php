@@ -44,12 +44,7 @@ class PlanetsReader implements PlanetsReaderInterface
         $planetCollectionTransfer = $this->planetsRestApiClient->getPlanetCollection(new PlanetCollectionTransfer());
 
         foreach ($planetCollectionTransfer->getPlanets() as $planetTransfer) {
-            $restResource = $this->restResourceBuilder->createRestResource(
-                PlanetsRestApiConfig::RESOURCE_PLANETS,
-                $planetTransfer->getIdPlanet(),
-                $this->planetMapper->mapPlanetDataToPlanetRestAttributes($planetTransfer->toArray())
-            );
-            $restResponse->addResource($restResource);
+            $this->addTransferObjectToResponse($planetTransfer, $restResponse);
         }
         return $restResponse;
     }
@@ -62,12 +57,27 @@ class PlanetsReader implements PlanetsReaderInterface
         $planetTransfer->setIdPlanet($planetId);
         $planetTransfer = $this->planetsRestApiClient->getPlanetById($planetTransfer);
 
+        $this->addTransferObjectToResponse($planetTransfer, $restResponse);
+
+        return $restResponse;
+    }
+    public function getPlanetsWithStar(RestRequestInterface $restRequest): RestResponseInterface
+    {
+        $restResponse = $this->restResourceBuilder->createRestResponse();
+        $planetCollectionTransfer = $this->planetsRestApiClient->getPlanetCollectionWithStar(new PlanetCollectionTransfer());
+
+        foreach ($planetCollectionTransfer->getPlanets() as $planetTransfer) {
+            $this->addTransferObjectToResponse($planetTransfer, $restResponse);
+        }
+        return $restResponse;
+    }
+
+    private function addTransferObjectToResponse(PlanetTransfer $planetTransfer, RestResponseInterface $restResponse) {
         $restResource = $this->restResourceBuilder->createRestResource(
             PlanetsRestApiConfig::RESOURCE_PLANETS,
             $planetTransfer->getIdPlanet(),
             $this->planetMapper->mapPlanetDataToPlanetRestAttributes($planetTransfer->toArray())
         );
         $restResponse->addResource($restResource);
-        return $restResponse;
     }
 }

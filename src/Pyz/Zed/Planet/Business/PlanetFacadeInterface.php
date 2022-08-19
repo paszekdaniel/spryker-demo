@@ -17,5 +17,7 @@ interface PlanetFacadeInterface
 
     public function getPlanetsCollection(): PlanetCollectionTransfer;
 
+    public function getPlanetsCollectionWithStar(): PlanetCollectionTransfer;
+
     public function findPlanetById(int $id): PlanetTransfer;
 }

@@ -42,4 +42,9 @@ class PlanetFacade extends AbstractFacade implements PlanetFacadeInterface
     {
         return $this->getFactory()->getPlanetReadHandler()->findPlanetById($id);
     }
+
+    public function getPlanetsCollectionWithStar(): PlanetCollectionTransfer
+    {
+        return $this->getFactory()->getPlanetReadHandler()->fetchALlWithStar();
+    }
 }

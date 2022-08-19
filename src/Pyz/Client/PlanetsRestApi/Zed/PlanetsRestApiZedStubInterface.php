@@ -11,4 +11,6 @@ interface PlanetsRestApiZedStubInterface
 
     public function getPlanetById(PlanetTransfer $planetTransfer): PlanetTransfer;
 
+    public function getPlanetCollectionWithStar(PlanetCollectionTransfer $planetCollectionTransfer): PlanetCollectionTransfer;
+
 }

@@ -11,7 +11,7 @@ Stars in PlanetStar module have planets, and in tables planets/stars are shown a
 
 [x] Glue rest api can fetch planet by id in ...com/planets/1 <br>
 [x] Delete Star cascades planets delete <br>
-[ ] Planet rest api fetches parent star with planet <br>
+[x] Planet rest api fetches parent star with planet <br>
 [ ] Select star name from list in PlanetForm <br>
 
 

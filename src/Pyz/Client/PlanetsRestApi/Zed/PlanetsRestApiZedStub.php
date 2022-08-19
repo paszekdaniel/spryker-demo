@@ -41,4 +41,12 @@ class PlanetsRestApiZedStub implements PlanetsRestApiZedStubInterface
 
         return $planetTransfer;
     }
+
+    public function getPlanetCollectionWithStar(PlanetCollectionTransfer $planetCollectionTransfer): PlanetCollectionTransfer
+    {
+        /** @var \Generated\Shared\Transfer\PlanetCollectionTransfer $planetCollectionTransfer */
+        $planetCollectionTransfer = $this->zedRequestClient->call('/planet/gateway/get-planet-collection-with-star', $planetCollectionTransfer);
+
+        return $planetCollectionTransfer;
+    }
 }

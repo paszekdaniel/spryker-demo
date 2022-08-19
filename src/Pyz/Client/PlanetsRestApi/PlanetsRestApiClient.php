@@ -32,4 +32,14 @@ class PlanetsRestApiClient extends AbstractClient implements PlanetsRestApiClien
             ->createPlanetZedStub()
             ->getPlanetById($planetTransfer);
     }
+    /**
+     * @api
+     * @return \Generated\Shared\Transfer\PlanetCollectionTransfer
+     */
+    public function getPlanetCollectionWithStar(PlanetCollectionTransfer $planetCollectionTransfer): PlanetCollectionTransfer
+    {
+        return $this->getFactory()
+            ->createPlanetZedStub()
+            ->getPlanetCollectionWithStar($planetCollectionTransfer);
+    }
 }

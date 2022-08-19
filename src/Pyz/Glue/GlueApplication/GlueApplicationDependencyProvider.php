@@ -7,6 +7,7 @@
 
 namespace Pyz\Glue\GlueApplication;
 
+use Pyz\Glue\PlanetsRestApi\Plugin\PlanetsRelationResourcePlugin;
 use Pyz\Glue\PlanetsRestApi\Plugin\PlanetsResourceRoutePlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestUserFinderPlugin;
@@ -189,6 +190,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     {
         return [
             new PlanetsResourceRoutePlugin(),
+            new PlanetsRelationResourcePlugin(),
             new ConcreteProductsResourceRoutePlugin(),
             new AccessTokensResourceRoutePlugin(),
             new RefreshTokensResourceRoutePlugin(),

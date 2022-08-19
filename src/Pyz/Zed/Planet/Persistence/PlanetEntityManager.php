@@ -25,13 +25,22 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
 
         $planetEntity->fromArray($dto->toArray());
 
-        if($dto->getStarName()) {
-            $star = $this->getFactory()->createStarQuery()->findOneByName($dto->getStarName());
+//        not sure if I still use $dto->getStarName(), but it was first there
+        if($dto->getStarName() || $dto->getStar()->getName()) {
+            $starName = $dto->getStarName();
+            if(!$starName) {
+                $starName = $dto->getStar()->getName();
+            }
+            $star = $this->getFactory()->createStarQuery()->findOneByName($starName);
             if(!$star) {
                 // wrong star
+                dd($dto);
                 throw new PropelException();
             }
-            $planetEntity->setPyzStar($star);
+//            Does it save star too?
+//            $planetEntity->setPyzStar($star);
+
+            $planetEntity->setFkStar($star->getIdStar());
         }
             $planetEntity->save();
 

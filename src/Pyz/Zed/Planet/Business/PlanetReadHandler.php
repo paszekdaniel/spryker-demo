@@ -24,4 +24,7 @@ class PlanetReadHandler
     public function findPlanetById(int $id): PlanetTransfer {
         return $this->repo->findPlanetEntityById($id);
     }
+    public function fetchALlWithStar(): PlanetCollectionTransfer {
+        return $this->repo->fetchALlPlanetsWithStars();
+    }
 }

@@ -5,6 +5,9 @@
     <transfer name="RestPlanetsResponseAttributes">
         <property name="name" type="string"/>
         <property name="interestingFact" type="string"/>
+        <property name="nrFromSun" type="int" />
+        <property name="volumeInEarths" type="float" />
+        <property name="star" type="PyzStarEntity" />
     </transfer>
     <transfer name="PlanetCollection" >
         <property name="planets" type="Planet[]" singular="planet" />

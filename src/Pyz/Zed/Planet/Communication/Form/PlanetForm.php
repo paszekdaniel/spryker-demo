@@ -22,7 +22,7 @@ class PlanetForm extends AbstractType
     public const FIELD_INTERESTING_FACT = 'interesting_fact';
     public const FIELD_NR_FROM_SUN = 'nr_from_sun';
     public const FIELD_VOLUME_IN_EARTHS = 'volume_in_earths';
-    public const FIELD_STAR = 'starName';
+    public const FIELD_STAR = 'star';
     private const BUTTON_SUBMIT = 'Submit';
 
     /**
@@ -61,6 +61,7 @@ class PlanetForm extends AbstractType
     {
         $builder->add(static::FIELD_STAR, TextType::class, [
             'required'   => false,
+            'property_path' => 'star.name'
         ]);
         return $this;
     }

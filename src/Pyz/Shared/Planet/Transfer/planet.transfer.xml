@@ -10,5 +10,6 @@
         <property name="volumeInEarths" type="float" />
         <property name="fkStar" type="int" />
         <property name="starName" type="string" />
+        <property name="star" type="PyzStarEntity" />
     </transfer>
 </transfers>
