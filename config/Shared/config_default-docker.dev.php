@@ -166,4 +166,5 @@ $config[StoreReferenceConstants::STORE_NAME_REFERENCE_MAP] = [
     'DE' => 'dev-DE',
     'AT' => 'dev-AT',
     'US' => 'dev-US',
+    'PL' => 'dev-PL'
 ];

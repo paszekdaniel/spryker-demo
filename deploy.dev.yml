@@ -57,6 +57,14 @@ regions:
                         namespace: 2
                     search:
                         namespace: at_search
+            PL:
+                services:
+                    broker:
+                        namespace: de-docker
+                    key_value_store:
+                        namespace: 9
+                    search:
+                        namespace: de_search
     US:
         services:
             database:
@@ -89,6 +97,11 @@ groups:
                         services:
                             session:
                                 namespace: 2
+                    yves.pl.spryker.local:
+                        store: PL
+                        services:
+                            session:
+                                namespace: 9
             glue_eu:
                 application: glue
                 endpoints:
@@ -96,6 +109,8 @@ groups:
                         store: DE
                     glue.at.spryker.local:
                         store: AT
+                    glue.pl.spryker.local:
+                        store: PL
             backoffice_eu:
                 application: backoffice
                 endpoints:
@@ -109,6 +124,11 @@ groups:
                         services:
                             session:
                                 namespace: 4
+                    backoffice.pl.spryker.local:
+                        store: PL
+                        services:
+                            session:
+                                namespace: 10
             backend_gateway_eu:
                 application: backend-gateway
                 endpoints:
@@ -118,6 +138,9 @@ groups:
                     backend-gateway.at.spryker.local:
                         store: AT
                         primal: true
+                    backend-gateway.pl.spryker.local:
+                        store: PL
+                        primal: true
             backend_api_eu:
                 application: zed
                 endpoints:
@@ -126,6 +149,9 @@ groups:
                         entry-point: BackendApi
                     backend-api.at.spryker.local:
                         store: AT
+                        entry-point: BackendApi
+                    backend-api.pl.spryker.local:
+                        store: PL
                         entry-point: BackendApi
     US:
         region: US
