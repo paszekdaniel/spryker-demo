@@ -180,6 +180,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
     protected function getConsoleCommands(Container $container): array
     {
         $commands = [
+            new DataImportConsole(DataImportConsole::DEFAULT_NAME . ':' . DataImportConfig::IMPORT_TYPE_PLANET),
             new CacheWarmerConsole(),
             new BuildNavigationConsole(),
             new RemoveNavigationCacheConsole(),
