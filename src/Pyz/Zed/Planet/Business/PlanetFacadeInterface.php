@@ -9,6 +9,11 @@ interface PlanetFacadeInterface
 {
     public function createPlanetEntity(PlanetTransfer $dto): ?PlanetTransfer;
 
+    /**
+     * requires id
+     * @param PlanetTransfer $dto
+     * @return PlanetTransfer|null
+     */
     public function updatePlanetEntity(PlanetTransfer $dto): ?PlanetTransfer;
 
     public function findPlanetByName(string $name): PlanetTransfer;

@@ -22,4 +22,6 @@ interface PlanetsReaderInterface
 
     public function postPlanet(RestRequestInterface $restRequest): RestResponseInterface;
 
+    public function updatePlanet(RestRequestInterface $restRequest): RestResponseInterface;
+
 }

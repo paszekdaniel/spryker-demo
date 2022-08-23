@@ -18,7 +18,7 @@ class PlanetsResourceController extends AbstractController
      */
     public function getAction(RestRequestInterface $restRequest): RestResponseInterface
     {
-        if(!$restRequest->getResource()->getId()) {
+        if (!$restRequest->getResource()->getId()) {
             return $this->getFactory()
                 ->createPlanetsReader()
                 ->getPlanets($restRequest);
@@ -28,11 +28,39 @@ class PlanetsResourceController extends AbstractController
             ->getPlanetById($restRequest);
     }
 
-    public function deleteAction(RestRequestInterface $restRequest): RestResponseInterface {
+    public function deleteAction(RestRequestInterface $restRequest): RestResponseInterface
+    {
         return $this->getFactory()->createPlanetsReader()->deletePlanetById($restRequest);
     }
-    public function postAction(RestRequestInterface $restRequest): RestResponseInterface {
+    /**
+     * path: /planets
+     * data: {
+     *  "type": "planets",
+     *  "attributes": {
+     *      "name": "hehe",
+     *      "interestingFact": "asda"
+     * ...
+     * }
+    public function postAction(RestRequestInterface $restRequest): RestResponseInterface
+    {
         return $this->getFactory()->createPlanetsReader()->postPlanet($restRequest);
+    }
+
+    /**
+     * path: /planets/id
+     * data: {
+     *  "type": "planets",
+     *  "attributes": {
+     *      "name": "hehe",
+     *      "interestingFact": "asda"
+     * ...
+     * }
+     * @param RestRequestInterface $restRequest
+     * @return RestResponseInterface
+     */
+    public function patchAction(RestRequestInterface $restRequest): RestResponseInterface
+    {
+        return $this->getFactory()->createPlanetsReader()->updatePlanet($restRequest);
     }
 
 

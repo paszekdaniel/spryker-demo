@@ -37,4 +37,8 @@ class GatewayController extends AbstractGatewayController
         }
         return $result;
     }
+
+    public function updatePlanetAction(PlanetTransfer $planetTransfer): PlanetTransfer {
+        return $this->getFacade()->updatePlanetEntity($planetTransfer);
+    }
 }

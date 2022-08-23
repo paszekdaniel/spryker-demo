@@ -107,12 +107,7 @@ class PlanetsReader implements PlanetsReaderInterface
     public function postPlanet(RestRequestInterface $restRequest): RestResponseInterface
     {
         $restResponse = $this->restResourceBuilder->createRestResponse();
-        $planetTransfer = new PlanetTransfer();
-        /**
-         * @var array $data
-         */
-        $data = $restRequest->getResource()->toArray()['attributes'];
-        $planetTransfer->fromArray($data);
+        $planetTransfer = $this->requestToTransfer($restRequest);
 
         $planetTransfer = $this->planetsRestApiClient->postPlanet($planetTransfer);
 
@@ -129,6 +124,26 @@ class PlanetsReader implements PlanetsReaderInterface
         return $restResponse;
     }
 
+
+    public function updatePlanet(RestRequestInterface $restRequest): RestResponseInterface
+    {
+        $restResponse = $this->restResourceBuilder->createRestResponse();
+        $planetTransfer = $this->requestToTransfer($restRequest);
+        $planetTransfer->setIdPlanet($restRequest->getResource()->getId());
+        if(!$planetTransfer->getIdPlanet()) {
+            $error = new RestErrorMessageTransfer();
+            $error->setCode(400);
+            $error->setDetail("Id not specified");
+            $restResponse->addError($error);
+            return $restResponse;
+        }
+        $planetTransfer = $this->planetsRestApiClient->updatePlanet($planetTransfer);
+
+        $this->addTransferObjectToResponse($planetTransfer, $restResponse);
+        return $restResponse;
+
+    }
+
     private function addTransferObjectToResponse(PlanetTransfer $planetTransfer, RestResponseInterface $restResponse)
     {
         $restResource = $this->restResourceBuilder->createRestResource(
@@ -137,6 +152,13 @@ class PlanetsReader implements PlanetsReaderInterface
             $this->planetMapper->mapPlanetDataToPlanetRestAttributes($planetTransfer->toArray())
         );
         $restResponse->addResource($restResource);
+    }
+    private function requestToTransfer(RestRequestInterface $restRequest): PlanetTransfer
+    {
+        $planetTransfer = new PlanetTransfer();
+        $data = $restRequest->getResource()->toArray()['attributes'];
+        $planetTransfer->fromArray($data);
+        return $planetTransfer;
     }
 
 
