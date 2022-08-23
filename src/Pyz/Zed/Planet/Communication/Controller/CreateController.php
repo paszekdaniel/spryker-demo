@@ -2,6 +2,8 @@
 
 namespace Pyz\Zed\Planet\Communication\Controller;
 
+use Generated\Shared\Transfer\PlanetTransfer;
+use Generated\Shared\Transfer\PyzStarEntityTransfer;
 use Pyz\Zed\Planet\Business\PlanetFacadeInterface;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
@@ -22,8 +24,10 @@ class CreateController extends AbstractController
 
     public function indexAction(Request $request)
     {
+        $transfer = new PlanetTransfer();
+        $transfer->setStar(new PyzStarEntityTransfer());
         $planetForm = $this->getFactory()
-            ->createPlanetForm()
+            ->createPlanetForm($transfer)
             ->handleRequest($request);
 
         if ($planetForm->isSubmitted() && $planetForm->isValid()) {
