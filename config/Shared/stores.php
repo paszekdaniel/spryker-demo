@@ -136,11 +136,11 @@ $stores['DE'] = [
             'DE-connection',
         ],
     ],
-    'storesWithSharedPersistence' => ['AT'],
+    'storesWithSharedPersistence' => ['AT', 'PL'],
 ];
 
 $stores['AT'] = [
-        'storesWithSharedPersistence' => ['DE'],
+        'storesWithSharedPersistence' => ['DE', 'PL'],
     ] + $stores['DE'];
 
 $stores['US'] = [
@@ -185,6 +185,8 @@ $stores['US'] = [
     'storesWithSharedPersistence' => [],
 ];
 
-$stores["PL"] = $stores["DE"];
+$stores["PL"] = [
+        'storesWithSharedPersistence' => ['DE', 'AT'],
+    ] + $stores['DE'];
 
 return $stores;

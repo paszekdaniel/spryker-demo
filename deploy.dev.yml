@@ -60,11 +60,11 @@ regions:
             PL:
                 services:
                     broker:
-                        namespace: de-docker
+                        namespace: pl-docker
                     key_value_store:
                         namespace: 9
                     search:
-                        namespace: de_search
+                        namespace: pl_search
     US:
         services:
             database:
@@ -128,7 +128,7 @@ groups:
                         store: PL
                         services:
                             session:
-                                namespace: 10
+                                namespace: 8
             backend_gateway_eu:
                 application: backend-gateway
                 endpoints:
