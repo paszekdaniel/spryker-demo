@@ -4,6 +4,7 @@ namespace Pyz\Glue\PlanetsRestApi\Processor\Planets;
 
 use Generated\Shared\Transfer\PlanetCollectionTransfer;
 use Generated\Shared\Transfer\PlanetTransfer;
+use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Pyz\Client\PlanetsRestApi\PlanetsRestApiClientInterface;
 use Pyz\Glue\PlanetsRestApi\PlanetsRestApiConfig;
 use Pyz\Glue\PlanetsRestApi\Processor\Mapper\PlanetsResourceMapper;
@@ -103,6 +104,30 @@ class PlanetsReader implements PlanetsReaderInterface
 
         return $restResponse;
     }
+    public function postPlanet(RestRequestInterface $restRequest): RestResponseInterface
+    {
+        $restResponse = $this->restResourceBuilder->createRestResponse();
+        $planetTransfer = new PlanetTransfer();
+        /**
+         * @var array $data
+         */
+        $data = $restRequest->getResource()->toArray()['attributes'];
+        $planetTransfer->fromArray($data);
+
+        $planetTransfer = $this->planetsRestApiClient->postPlanet($planetTransfer);
+
+        if(!$planetTransfer->getIdPlanet()) {
+            $errorTransfer = new RestErrorMessageTransfer();
+            $errorTransfer->setCode(400);
+            $errorTransfer->setDetail("failed. Probably already this one exists");
+//            $errorTransfer->
+            $restResponse->addError($errorTransfer);
+            return $restResponse;
+        }
+        $this->addTransferObjectToResponse($planetTransfer, $restResponse);
+
+        return $restResponse;
+    }
 
     private function addTransferObjectToResponse(PlanetTransfer $planetTransfer, RestResponseInterface $restResponse)
     {
@@ -113,6 +138,7 @@ class PlanetsReader implements PlanetsReaderInterface
         );
         $restResponse->addResource($restResource);
     }
+
 
 
 }

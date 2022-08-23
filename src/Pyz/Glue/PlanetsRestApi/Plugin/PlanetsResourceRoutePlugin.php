@@ -17,7 +17,8 @@ class PlanetsResourceRoutePlugin extends AbstractPlugin implements ResourceRoute
     {
         $resourceRouteCollection
             ->addGet('get', false)
-        ->addDelete('delete', false);
+        ->addDelete('delete', false)
+        ->addPost('post', false);
 
         return $resourceRouteCollection;
     }

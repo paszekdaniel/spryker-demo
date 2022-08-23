@@ -16,7 +16,7 @@ GLUE: <br>
 [x] Planet rest api fetches parent star with planet <br>
 [x] GET planets-relation/$id endpoint <br>
 [x] DELETE endpoint for planets <br>
-[ ] POST endpoint for creating planets?? <br><br><br>
+[x] POST endpoint for creating planets?? <br><br><br>
 [ ] Edit form for Star <br>
 [ ] Select star name from list in PlanetForm <br>
 

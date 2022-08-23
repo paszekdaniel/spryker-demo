@@ -27,11 +27,8 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
         $planetEntity->fromArray($dto->toArray());
 
 //        not sure if I still use $dto->getStarName(), but it was first there
-        if($dto->getStarName() || $dto->getStar()->getName()) {
-            $starName = $dto->getStarName();
-            if(!$starName) {
-                $starName = $dto->getStar()->getName();
-            }
+        $starName = $dto->getStar() ? $dto->getStar()->getName() : $dto->getStarName();
+        if($starName) {
             $star = $this->getFactory()->createStarQuery()->findOneByName($starName);
             if(!$star) {
                 // wrong star
@@ -43,7 +40,7 @@ class PlanetEntityManager extends AbstractEntityManager implements PlanetEntityM
 
             $planetEntity->setFkStar($star->getIdStar());
         }
-            $planetEntity->save();
+        $planetEntity->save();
 
         $dto->fromArray($planetEntity->toArray());
         return $dto;

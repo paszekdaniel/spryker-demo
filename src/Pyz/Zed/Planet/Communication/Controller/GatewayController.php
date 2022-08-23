@@ -25,8 +25,16 @@ class GatewayController extends AbstractGatewayController
         return $this->getFacade()->findPlanetWithStarById($transfer->getIdPlanet());
     }
     public function deletePlanetByIdAction(PlanetTransfer $transfer): PlanetTransfer {
-//        TODO: do sth with it
+//        TODO: change transfer somehow? Not giving response right now
          $this->getFacade()->deletePlanetById($transfer->getIdPlanet());
         return $transfer;
+    }
+
+    public function postPlanetAction(PlanetTransfer $planetTransfer): PlanetTransfer {
+        $result = $this->getFacade()->createPlanetEntity($planetTransfer);
+        if(!$result) {
+            $result = new PlanetTransfer();
+        }
+        return $result;
     }
 }

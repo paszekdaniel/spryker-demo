@@ -37,5 +37,11 @@ interface PlanetsRestApiClientInterface
      */
     public function deletePlanetById(PlanetTransfer $planetTransfer): PlanetTransfer;
 
+    /**
+     * @api
+     * @return PlanetTransfer
+     */
+    public function postPlanet(PlanetTransfer $planetTransfer): PlanetTransfer;
+
 }
 

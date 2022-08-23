@@ -20,4 +20,6 @@ interface PlanetsReaderInterface
 
     public function deletePlanetById(RestRequestInterface $restRequest): RestResponseInterface;
 
+    public function postPlanet(RestRequestInterface $restRequest): RestResponseInterface;
+
 }

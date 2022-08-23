@@ -31,6 +31,9 @@ class PlanetsResourceController extends AbstractController
     public function deleteAction(RestRequestInterface $restRequest): RestResponseInterface {
         return $this->getFactory()->createPlanetsReader()->deletePlanetById($restRequest);
     }
+    public function postAction(RestRequestInterface $restRequest): RestResponseInterface {
+        return $this->getFactory()->createPlanetsReader()->postPlanet($restRequest);
+    }
 
 
 }

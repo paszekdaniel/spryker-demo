@@ -69,4 +69,14 @@ class PlanetsRestApiZedStub implements PlanetsRestApiZedStubInterface
 
         return $planetTransfer;
     }
+
+    public function postPlanet(PlanetTransfer $planetTransfer): PlanetTransfer
+    {
+        /**
+         * @var \Generated\Shared\Transfer\PlanetTransfer $planetTransfer
+         */
+        $planetTransfer = $this->zedRequestClient->call('/planet/gateway/post-planet', $planetTransfer);
+
+        return $planetTransfer;
+    }
 }
