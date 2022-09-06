@@ -31,6 +31,8 @@ class PlanetsRestApiClient extends AbstractClient implements PlanetsRestApiClien
         return $this->getFactory()
             ->createPlanetZedStub()
             ->getPlanetById($planetTransfer);
+//        return $this->getFactory()->createPlanetsStorageReader()->getPlanetById($planetTransfer->getIdPlanet());
+
     }
     /**
      * @api
