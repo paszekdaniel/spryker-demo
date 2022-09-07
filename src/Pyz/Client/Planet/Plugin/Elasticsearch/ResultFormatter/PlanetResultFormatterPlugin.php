@@ -3,6 +3,7 @@
 namespace Pyz\Client\Planet\Plugin\Elasticsearch\ResultFormatter;
 
 use Elastica\ResultSet;
+use Generated\Shared\Transfer\PyzStarEntityTransfer;
 use Spryker\Client\SearchElasticsearch\Plugin\ResultFormatter\AbstractElasticsearchResultFormatterPlugin;
 
 
@@ -28,5 +29,6 @@ class PlanetResultFormatterPlugin extends AbstractElasticsearchResultFormatterPl
             return $document->getSource();
         }
         return [];
+
     }
 }
