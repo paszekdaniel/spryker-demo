@@ -8,6 +8,8 @@
 namespace Pyz\Yves\CmsContentWidget;
 
 use Pyz\Shared\CmsContentWidgetProductConnector\ContentWidgetConfigurationProvider\CmsProductGroupContentWidgetConfigurationProvider;
+use Pyz\Yves\CmsContentWidgetPlanetConnector\ContentWidgetConfigurationProvider\CmsContentWidgetPlanetConnectorConfigurationProvider;
+use Pyz\Yves\CmsContentWidgetPlanetConnector\Plugin\CmsContentWidget\PlanetContentWidgetPlugin;
 use Spryker\Shared\CmsContentWidgetCmsBlockConnector\ContentWidgetConfigurationProvider\CmsContentWidgetCmsBlockConnectorConfigurationProvider;
 use Spryker\Yves\CmsContentWidget\CmsContentWidgetDependencyProvider as SprykerCmsContentWidgetDependencyProvider;
 use Spryker\Yves\CmsContentWidgetCmsBlockConnector\Plugin\CmsContentWidget\CmsBlockContentWidgetPlugin;
@@ -43,6 +45,9 @@ class CmsContentWidgetDependencyProvider extends SprykerCmsContentWidgetDependen
             CmsContentWidgetCmsBlockConnectorConfigurationProvider::FUNCTION_NAME => new CmsBlockContentWidgetPlugin(
                 new CmsContentWidgetCmsBlockConnectorConfigurationProvider()
             ),
+            CmsContentWidgetPlanetConnectorConfigurationProvider::FUNCTION_NAME => new PlanetContentWidgetPlugin(
+                new CmsContentWidgetPlanetConnectorConfigurationProvider()
+            )
         ];
     }
 }

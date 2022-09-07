@@ -12,6 +12,7 @@ class PlanetWriterStep extends PublishAwareStep implements DataImportStepInterfa
 {
     public const KEY_NAME = 'name';
     public const KEY_INTERESTING_FACT = 'interesting_fact';
+    public const KEY_NR_FROM_SUN = 'nr_from_sun';
 
     /**
      * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
@@ -27,6 +28,7 @@ class PlanetWriterStep extends PublishAwareStep implements DataImportStepInterfa
             ->findOneOrCreate();
 
         $planetEntity->setInterestingFact($dataSet[static::KEY_INTERESTING_FACT]);
+        $planetEntity->setNrFromSun($dataSet[static::KEY_NR_FROM_SUN]);
 
         if ($planetEntity->isNew() || $planetEntity->isModified()) {
             $planetEntity->save();

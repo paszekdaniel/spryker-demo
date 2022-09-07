@@ -1,5 +1,6 @@
-name,interesting_fact
-Mercury,"The closest planet to the Sun and the smallest in the Solar System."
-Venus,"It is much drier than Earth, and its atmosphere is ninety times as dense."
-Earth,"The only place where life is known to exist."
-Mars,"We will nuke aliens there"
+name,interesting_fact,nr_from_sun
+Mercury,"The closest planet to the Sun and the smallest in the Solar System.",1
+Venus,"It is much drier than Earth, and its atmosphere is ninety times as dense.",2
+Earth,"The only place where life is known to exist.",3
+Mars,"We will nuke aliens there",4
+Jupiter,"The biggest one!",5
