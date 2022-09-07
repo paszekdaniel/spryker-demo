@@ -20,5 +20,8 @@
         <foreign-key foreignTable="pyz_star" onDelete="CASCADE">
             <reference local="fk_star" foreign="id_star" />
         </foreign-key>
+        <behavior name="event">
+            <parameter name="pyz_planet_all" column="*"/>
+        </behavior>
     </table>
 </database>
